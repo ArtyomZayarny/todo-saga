@@ -1,5 +1,5 @@
 import { TodoStat } from "@/typings";
-import Button from "./components/button";
+import Button from "./components/ui/button";
 import TodoList from "./components/todo-list";
 
 export default function Home() {
