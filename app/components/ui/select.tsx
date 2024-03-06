@@ -2,11 +2,17 @@
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { StatusEnum, TodoStat } from "@/typings";
 
-const people = [{ name: "todo" }, { name: "in progress" }, { name: "done" }];
+const options = [{ name: "todo" }, { name: "in progress" }, { name: "done" }];
 
-export default function Example() {
-  const [selected, setSelected] = useState(people[0]);
+type Props = {
+  status: StatusEnum;
+};
+
+export default function Select({ status }: Props) {
+  const initStatus = !status ? options[0] : { name: status };
+  const [selected, setSelected] = useState(initStatus);
 
   return (
     <div className="w-36">
@@ -28,15 +34,15 @@ export default function Example() {
             leaveTo="opacity-0"
           >
             <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base  ring-1 ring-black/5 focus:outline-none sm:text-sm">
-              {people.map((person, personIdx) => (
+              {options.map((option) => (
                 <Listbox.Option
-                  key={personIdx}
+                  key={option}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-10 pr-4 ${
                       active ? "bg-amber-100 text-amber-900" : "text-gray-900"
                     }`
                   }
-                  value={person}
+                  value={option}
                 >
                   {({ selected }) => (
                     <>
@@ -45,7 +51,7 @@ export default function Example() {
                           selected ? "font-medium" : "font-normal"
                         }`}
                       >
-                        {person.name}
+                        {option.name}
                       </span>
                       {selected ? (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
