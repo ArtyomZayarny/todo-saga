@@ -9,9 +9,8 @@ type Props = {
 
 function Todo({ todo }: Props) {
   const { name, status, description } = todo;
-  console.log(todo);
   return (
-    <li className="flex gap-3 bg-white p-3 rounded items-center justify-between">
+    <li className="flex gap-3 bg-white p-3 rounded items-center justify-betweenv mb-2">
       <div>
         <span className="font-bold text-lg shrink-1 mb-2 flex">{name}</span>
         <p className="text-sm">{description}</p>

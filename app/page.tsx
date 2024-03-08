@@ -1,22 +1,15 @@
-import { TodoStat } from "@/typings";
-import Button from "./components/ui/button";
-import TodoList from "./components/todo-list";
+"use client";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
+import Dashboard from "./components/dashboard";
 
 export default function Home() {
-  const todos = [
-    {
-      id: 1,
-      name: "write this app",
-      status: TodoStat.IN_PROGRESS,
-      description: "Link Redux suga and chypress",
-    },
-  ];
-
   return (
     <main className="content bg-blue-100">
       <div className="container p-4 mx-auto">
-        <Button />
-        <TodoList todos={todos} />
+        <Provider store={store}>
+          <Dashboard />
+        </Provider>
       </div>
     </main>
   );
