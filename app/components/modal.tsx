@@ -23,6 +23,11 @@ export default function Modal({ isOpen }: Props) {
     e.preventDefault();
     dispatch(postTodo(todo));
     closeModal();
+    setTodo({
+      name: "",
+      description: "",
+      status: "todo",
+    });
   };
 
   const handleChangeTodo = (e: any) => {
