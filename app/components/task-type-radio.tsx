@@ -25,18 +25,16 @@ const types = [
   },
 ];
 
-function TaskTypeRadio() {
-  const [taskType, setTaskType] = useState("todo");
+type Props = {
+  status: string;
+  handleStatusChange: (e: any) => void;
+};
 
+function TaskTypeRadio({ status, handleStatusChange }: Props) {
   return (
     <div className="w-full py-5">
       <div className="mx-auto w-full max-w-md">
-        <RadioGroup
-          value={taskType}
-          onChange={(e) => {
-            setTaskType(e);
-          }}
-        >
+        <RadioGroup value={status} onChange={(e) => handleStatusChange(e)}>
           <div className="space-y-2">
             {types.map((type) => (
               <RadioGroup.Option

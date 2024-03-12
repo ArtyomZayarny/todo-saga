@@ -3,17 +3,38 @@
 import { Dialog, Transition } from "@headlessui/react";
 import React, { FormEvent, Fragment, useRef, useState } from "react";
 import TaskTypeRadio from "./task-type-radio";
+import { useDispatch } from "react-redux";
+import { addTodo, postTodo, setModal } from "../redux/reducers/todo";
 
-export default function Modal() {
-  const isOpen = false;
-  const closeModal = () => {};
+type Props = {
+  isOpen: boolean;
+};
+
+export default function Modal({ isOpen }: Props) {
+  const dispatch = useDispatch();
+  const closeModal = () => dispatch(setModal(false));
+  const [todo, setTodo] = useState({
+    name: "",
+    description: "",
+    status: "todo",
+  });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    dispatch(postTodo(todo));
+    closeModal();
+  };
+
+  const handleChangeTodo = (e: any) => {
+    if (e?.target?.name) {
+      setTodo({ ...todo, [e.target.name]: e.target.value });
+    } else {
+      setTodo({ ...todo, status: e });
+    }
   };
 
   return (
-    <Transition appear show={isOpen} as={Fragment}>
+    <Transition appear show={isOpen ? isOpen : false} as={Fragment}>
       <Dialog
         as="form"
         onSubmit={handleSubmit}
@@ -56,21 +77,24 @@ export default function Modal() {
                 <div className="mt-2">
                   <input
                     type="text"
-                    value={""}
-                    //onChange={(e) => setNewTaskInput(e.target.value)}
-                    onChange={() => {}}
+                    value={todo.name}
+                    name="name"
+                    onChange={handleChangeTodo}
                     placeholder="Enter a task here..."
                     className="w-full border border-gray-300 rounded-md outline-none p-5"
                   />
                 </div>
                 {/* Radio groupd */}
-                <TaskTypeRadio />
+                <TaskTypeRadio
+                  status={todo.status}
+                  handleStatusChange={handleChangeTodo}
+                />
 
                 <div className="mt-2">
                   <textarea
-                    value={""}
-                    //onChange={(e) => setNewTaskInput(e.target.value)}
-                    onChange={() => {}}
+                    name="description"
+                    value={todo.description}
+                    onChange={handleChangeTodo}
                     placeholder="Description..."
                     className="w-full border border-gray-300 rounded-md outline-none p-5"
                   ></textarea>
@@ -79,7 +103,7 @@ export default function Modal() {
                 <div className="mt-4">
                   <button
                     type="submit"
-                    // disabled={!newTaskInput}
+                    disabled={!todo.name}
                     className="inline-flex justify-center rounded-md border border-transparent bg-blue-200 px-4 py-2
                   text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2
                   focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:bg-gray-100 disabled:text-gray-300

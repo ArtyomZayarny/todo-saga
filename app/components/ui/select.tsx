@@ -4,22 +4,26 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { StatusEnum, TodoStat } from "@/typings";
 
-const options = [{ name: "todo" }, { name: "in progress" }, { name: "done" }];
+const options = [
+  { id: "todo", name: "todo" },
+  { id: "inprogress", name: "in progress" },
+  { id: "done", name: "done" },
+];
 
 type Props = {
   status: StatusEnum;
+  handleChangeStatus: (value: any) => void;
 };
 
-export default function Select({ status }: Props) {
-  const initStatus = !status ? options[0] : { name: status };
-  const [selected, setSelected] = useState(initStatus);
+export default function Select({ status, handleChangeStatus }: Props) {
+  const initStatus = !status ? options[0] : { id: `${status}`, name: status };
 
   return (
     <div className="w-36">
-      <Listbox value={selected} onChange={setSelected}>
+      <Listbox value={initStatus} onChange={handleChangeStatus}>
         <div className="relative mt-1">
           <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left  focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-            <span className="block truncate font-bold">{selected.name}</span>
+            <span className="block truncate font-bold">{initStatus.name}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronUpDownIcon
                 className="h-5 w-5 text-gray-400"
@@ -33,10 +37,10 @@ export default function Select({ status }: Props) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base  ring-1 ring-black/5 focus:outline-none sm:text-sm">
+            <Listbox.Options className="absolute mt-1 max-h-60 w-full z-10 overflow-auto rounded-md bg-white py-1 text-base  ring-1 ring-black/5 focus:outline-none sm:text-sm">
               {options.map((option) => (
                 <Listbox.Option
-                  key={option}
+                  key={option.id}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-10 pr-4 ${
                       active ? "bg-amber-100 text-amber-900" : "text-gray-900"

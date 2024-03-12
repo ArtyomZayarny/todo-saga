@@ -1,5 +1,5 @@
 export interface ITodo {
-  id: number;
+  _id: string;
   name: string;
   status: StatusEnum;
   description: string;

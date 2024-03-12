@@ -23,7 +23,6 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
-        <Modal />
       </body>
     </html>
   );
