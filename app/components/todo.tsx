@@ -16,10 +16,11 @@ function Todo({ todo }: Props) {
 
   const handleChangeStatus = useCallback(
     (value: any) => {
+      console.log("value", value);
       dispatch(
         updateTodoStatus({
-          status: value.status,
-          id: value.id,
+          status: value.name,
+          id: _id,
         })
       );
     },

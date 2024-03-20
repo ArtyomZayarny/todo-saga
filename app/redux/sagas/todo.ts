@@ -64,7 +64,7 @@ function* deleteTodoWorker(todo: any): any {
 }
 
 function* changeStatusWorker(todo: any): any {
-  yield call(updateTodoStatus, todo.payload.id, todo.payload.status.name);
+  yield call(updateTodoStatus, todo.payload.id, todo.payload.status);
   yield put(changeTodoStatus(todo.payload));
 }
 
