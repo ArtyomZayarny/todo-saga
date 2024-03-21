@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import Select from "./ui/select";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import { ITodo } from "@/typings";
@@ -13,10 +13,11 @@ type Props = {
 function Todo({ todo }: Props) {
   const dispatch = useDispatch();
   const { name, status, description, _id } = todo;
+  const [currentTodoStatus, setCurrentTodoStatus] = useState(status);
 
   const handleChangeStatus = useCallback(
     (value: any) => {
-      console.log("value", value);
+      setCurrentTodoStatus(value.name);
       dispatch(
         updateTodoStatus({
           status: value.name,
@@ -32,11 +33,21 @@ function Todo({ todo }: Props) {
       className="flex gap-3 bg-white p-3 rounded items-center justify-between mb-2"
     >
       <div className="w-full">
-        <span className="font-bold text-lg shrink-1 mb-2 flex">{name}</span>
-        <p className="text-sm">{description}</p>
+        <span
+          data-test="todo-title"
+          className="font-bold text-lg shrink-1 mb-2 flex"
+        >
+          {name}
+        </span>
+        <p data-test="todo-description" className="text-sm">
+          {description}
+        </p>
       </div>
       <div className="w-200 flex items-center gap-3">
-        <Select status={status} handleChangeStatus={handleChangeStatus} />
+        <Select
+          status={currentTodoStatus}
+          handleChangeStatus={handleChangeStatus}
+        />
         <button
           className="cursor-pointer"
           onClick={() => dispatch(deleteTodo(_id))}

@@ -19,11 +19,13 @@ export default function Select({ status, handleChangeStatus }: Props) {
   const initStatus = !status ? options[0] : { id: `${status}`, name: status };
 
   return (
-    <div className="w-36">
+    <div data-test="status-dropdown" className="w-36">
       <Listbox value={initStatus} onChange={handleChangeStatus}>
         <div className="relative mt-1">
           <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left  focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-            <span className="block truncate font-bold">{initStatus.name}</span>
+            <span data-test="todo-status" className="block truncate font-bold">
+              {initStatus.name}
+            </span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronUpDownIcon
                 className="h-5 w-5 text-gray-400"
@@ -37,9 +39,13 @@ export default function Select({ status, handleChangeStatus }: Props) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute mt-1 max-h-60 w-full z-10 overflow-auto rounded-md bg-white py-1 text-base  ring-1 ring-black/5 focus:outline-none sm:text-sm">
+            <Listbox.Options
+              data-test="status-list"
+              className="absolute mt-1 max-h-60 w-full z-10 overflow-auto rounded-md bg-white py-1 text-base  ring-1 ring-black/5 focus:outline-none sm:text-sm"
+            >
               {options.map((option) => (
                 <Listbox.Option
+                  data-test={`status-${option.id}`}
                   key={option.id}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-10 pr-4 ${

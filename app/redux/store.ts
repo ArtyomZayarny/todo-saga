@@ -13,4 +13,14 @@ export const store = configureStore({
     }).concat(sagaMiddleware),
 });
 
+export const getStore = () =>
+  configureStore({
+    reducer: combineReducers({ todoReducer }),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }).concat(sagaMiddleware),
+  });
+export type RootState = ReturnType<typeof store.getState>;
+
 sagaMiddleware.run(rootWatcher);
