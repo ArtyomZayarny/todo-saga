@@ -35,9 +35,10 @@ function TaskTypeRadio({ status, handleStatusChange }: Props) {
     <div className="w-full py-5">
       <div className="mx-auto w-full max-w-md">
         <RadioGroup value={status} onChange={(e) => handleStatusChange(e)}>
-          <div className="space-y-2">
+          <div data-test="radio-group" className="space-y-2">
             {types.map((type) => (
               <RadioGroup.Option
+                data-test="radio-item"
                 key={type.id}
                 value={type.id}
                 className={({ active, checked }) =>

@@ -73,6 +73,7 @@ export default function Modal({ isOpen }: Props) {
             align-middle shadow-xl transition-all"
               >
                 <Dialog.Title
+                  data-test="modal-title"
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-9000 pb-2"
                 >
@@ -81,6 +82,7 @@ export default function Modal({ isOpen }: Props) {
 
                 <div className="mt-2">
                   <input
+                    data-test="modal-input"
                     type="text"
                     value={todo.name}
                     name="name"
@@ -97,6 +99,7 @@ export default function Modal({ isOpen }: Props) {
 
                 <div className="mt-2">
                   <textarea
+                    data-test="modal-textarea"
                     name="description"
                     value={todo.description}
                     onChange={handleChangeTodo}
@@ -107,6 +110,7 @@ export default function Modal({ isOpen }: Props) {
 
                 <div className="mt-4">
                   <button
+                    data-test="modal-submit"
                     type="submit"
                     disabled={!todo.name}
                     className="inline-flex justify-center rounded-md border border-transparent bg-blue-200 px-4 py-2
