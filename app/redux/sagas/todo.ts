@@ -13,6 +13,7 @@ import { changeTodoStatus } from "../actions/todo";
 import { ITodo } from "@/typings";
 
 const fetchTodos = () => fetch("https://nest-todo-api-qtrw.onrender.com/todo");
+
 const postTodo = (todo: ITodo) =>
   fetch("https://nest-todo-api-qtrw.onrender.com/todo", {
     method: "POST",

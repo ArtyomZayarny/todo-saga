@@ -38,3 +38,10 @@
 Cypress.Commands.add("getDataTest", (dataTestSelector) =>
   cy.get(`[data-test="${dataTestSelector}"]`)
 );
+
+Cypress.Commands.add("fetchTodos", (todosFixture) => {
+  cy.intercept("GET", "https://nest-todo-api-qtrw.onrender.com/todo", {
+    statusCode: 200,
+    body: todosFixture,
+  }).as("fetchTodos");
+});

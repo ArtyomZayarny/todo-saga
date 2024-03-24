@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 function LoadingResults() {
   return (
-    <section>
+    <section data-test="loading">
       <p className="text-center">We are loading your&apos;s task....</p>
       <div className="space-y-2 p-5">
         {[...Array(10)].map((_, i) => (

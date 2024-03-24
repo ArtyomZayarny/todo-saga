@@ -41,6 +41,7 @@ export default function Modal({ isOpen }: Props) {
   return (
     <Transition appear show={isOpen ? isOpen : false} as={Fragment}>
       <Dialog
+        data-test="modal-window"
         as="form"
         onSubmit={handleSubmit}
         onClose={closeModal}

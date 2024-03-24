@@ -32,7 +32,7 @@ describe("Modal.cy.tsx", () => {
 
   it("Should activate submit button", () => {
     cy.getDataTest("modal-submit").should("be.disabled");
-    cy.getDataTest("modal-input").type("timaz.dev@gmail.com");
+    cy.getDataTest("modal-input").type("My test todo");
     cy.getDataTest("modal-submit").should("not.be.disabled");
   });
 });

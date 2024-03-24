@@ -29,6 +29,7 @@ function Todo({ todo }: Props) {
   );
   return (
     <li
+      data-test={_id}
       key={_id}
       className="flex gap-3 bg-white p-3 rounded items-center justify-between mb-2"
     >
@@ -49,6 +50,7 @@ function Todo({ todo }: Props) {
           handleChangeStatus={handleChangeStatus}
         />
         <button
+          data-test="remove-todo"
           className="cursor-pointer"
           onClick={() => dispatch(deleteTodo(_id))}
         >
